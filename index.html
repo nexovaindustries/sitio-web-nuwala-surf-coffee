@@ -149,6 +149,24 @@
             50% { border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; transform: translate(-50%, -50%) rotate(180deg); }
             100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: translate(-50%, -50%) rotate(360deg); }
         }
+
+        /* Smoke Click Effect */
+        .smoke-effect {
+            position: fixed;
+            pointer-events: none;
+            width: 25px;
+            height: 25px;
+            background: radial-gradient(circle, rgba(255, 181, 156, 0.45) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+            filter: blur(4px);
+            animation: puff 0.8s ease-out forwards;
+        }
+        @keyframes puff {
+            0% { transform: translate(-50%, -50%) scale(0.2); opacity: 1; }
+            100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(var(--s)); opacity: 0; }
+        }
         
         /* Interactive Elements Highlighting */
         a:hover ~ .cursor-outline, button:hover ~ .cursor-outline, .hover-target:hover ~ .cursor-outline {
@@ -939,6 +957,27 @@
                     preloader.style.display = 'none';
                 }, 800);
             }, 2000); 
+        });
+
+        // Smoke Click Effect Generator (Works on all devices)
+        window.addEventListener('click', (e) => {
+            const posX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+            const posY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+            
+            if(posX === 0 && posY === 0) return;
+            
+            for(let i=0; i<3; i++) {
+                const smoke = document.createElement('div');
+                smoke.className = 'smoke-effect';
+                smoke.style.left = posX + 'px';
+                smoke.style.top = posY + 'px';
+                smoke.style.setProperty('--tx', (Math.random() * 60 - 30) + 'px');
+                smoke.style.setProperty('--ty', (Math.random() * -80 - 30) + 'px');
+                smoke.style.setProperty('--s', (Math.random() * 3 + 2));
+                document.body.appendChild(smoke);
+                
+                setTimeout(() => { smoke.remove(); }, 800);
+            }
         });
 
         // Custom Cursor Logic (Only for non-touch devices)

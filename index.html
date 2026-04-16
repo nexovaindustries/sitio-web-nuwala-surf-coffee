@@ -133,7 +133,10 @@
         }
 
         /* Mix Blend Modes */
-        .blend-lighten { mix-blend-mode: lighten; }
+        .blend-lighten { 
+            mix-blend-mode: screen; 
+            filter: grayscale(100%) contrast(200%);
+        }
         
         /* Image Cropping Trick for Brand Name */
         .crop-bottom-wrapper {
@@ -281,7 +284,36 @@
         </div>
     </section>
 
-    <!-- Gallery Section & MAP (Location) -->
+    <!-- Ambiente Nuwala Gallery -->
+    <section id="ambiente" class="py-24 bg-surface-container-low border-t border-white/5 relative z-10">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="mb-16 text-center" data-aos="fade-up">
+                <h2 class="font-headline text-4xl md:text-5xl font-bold text-white uppercase tracking-tighter">Ambiente Nuwala</h2>
+                <p class="font-body text-on-surface-variant mt-4 max-w-xl mx-auto">Vibras tropicales, luces de neón y café de especialidad. Un refugio intervenido para fluir.</p>
+            </div>
+            
+            <!-- Masonry-like Grid -->
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden shadow-2xl" data-aos="zoom-in-up">
+                    <img src="assets/img/ambiente-1.jpg" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 hover:brightness-110" alt="Ambiente Surf">
+                </div>
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden shadow-2xl" data-aos="zoom-in-up" data-aos-delay="100">
+                    <img src="assets/img/ambiente-2.jpg" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 hover:brightness-110" alt="Neon Open">
+                </div>
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden shadow-2xl" data-aos="zoom-in-up" data-aos-delay="200">
+                    <img src="assets/img/ambiente-3.jpg" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 hover:brightness-110" alt="Surfboard art">
+                </div>
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden shadow-2xl" data-aos="zoom-in-up">
+                    <img src="assets/img/ambiente-4.jpg" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 hover:brightness-110" alt="Mesas">
+                </div>
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden shadow-2xl" data-aos="zoom-in-up" data-aos-delay="100">
+                    <img src="assets/img/ambiente-5.jpg" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 hover:brightness-110" alt="Noche luces">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAP (Location) -->
     <section id="location" class="py-32 bg-background relative overflow-hidden">
         <!-- Floating Text background -->
         <div class="absolute top-1/4 left-[-5%] whitespace-nowrap opacity-[0.03] select-none pointer-events-none z-0 overflow-hidden" data-aos="fade-right" data-aos-duration="2000">

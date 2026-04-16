@@ -130,21 +130,28 @@
             pointer-events: none;
         }
         .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #ffb59c; /* primary */
+            width: auto;
+            height: auto;
+            background-color: transparent !important;
         }
         .cursor-outline {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border: 2px solid #ffb59c; /* primary */
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
             transition: width 0.2s, height 0.2s, background-color 0.2s;
+            animation: waveBlob 6s linear infinite;
+        }
+        @keyframes waveBlob {
+            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: translate(-50%, -50%) rotate(0deg); }
+            50% { border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; transform: translate(-50%, -50%) rotate(180deg); }
+            100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: translate(-50%, -50%) rotate(360deg); }
         }
         
         /* Interactive Elements Highlighting */
         a:hover ~ .cursor-outline, button:hover ~ .cursor-outline, .hover-target:hover ~ .cursor-outline {
-            width: 70px;
-            height: 70px;
+            width: 75px;
+            height: 75px;
             background-color: rgba(255, 181, 156, 0.15);
         }
 
@@ -229,13 +236,15 @@
     </div>
 
     <!-- Custom Cursor (Requires JS) -->
-    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-dot hidden md:flex items-center justify-center">
+        <span id="cursor-icon" class="material-symbols-outlined text-primary text-[28px] drop-shadow-md">surfing</span>
+    </div>
     <div class="cursor-outline hidden md:block"></div>
 
     <!-- TopNavBar -->
     <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-4 bg-black/70 backdrop-blur-xl border-b border-white/5 transition-all duration-300 shadow-2xl">
-        <a href="#" class="text-xl font-bold tracking-tighter text-white flex items-center gap-3 font-headline hover-target" data-aos="fade-down">
-            <img src="assets/img/logo.jpg" alt="Nuwala Logo" class="h-10 w-10 md:h-12 md:w-12 blend-lighten object-contain pointer-events-none drop-shadow-md"/>
+        <a href="#" class="text-xl font-bold tracking-tighter text-white flex items-center gap-4 font-headline hover-target" data-aos="fade-down">
+            <img src="assets/img/logo.jpg" alt="Nuwala Logo" class="h-14 w-14 md:h-16 md:w-16 blend-lighten object-contain pointer-events-none drop-shadow-md"/>
             <span class="hidden sm:block">NUWALA SURF COFFEE</span>
         </a>
         <div class="hidden lg:flex gap-8 items-center" data-aos="fade-down" data-aos-delay="100">
@@ -832,8 +841,8 @@
         <div class="container mx-auto px-6 md:px-12 relative z-10 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
             
             <div class="flex flex-col items-center md:items-start" data-aos="fade-up">
-                <div class="text-white font-headline font-bold text-xl md:text-3xl tracking-tighter flex items-center gap-3">
-                    <img src="assets/img/logo.jpg" alt="Nuwala Logo" class="h-8 w-8 blend-lighten pointer-events-none"/>
+                <div class="text-white font-headline font-bold text-xl md:text-3xl tracking-tighter flex items-center gap-4">
+                    <img src="assets/img/logo.jpg" alt="Nuwala Logo" class="h-14 w-14 md:h-16 md:w-16 blend-lighten pointer-events-none"/>
                     NUWALA SURF COFFEE.
                 </div>
                 <p class="text-primary text-[10px] uppercase tracking-[0.4em] mt-4 font-bold bg-primary/10 px-4 py-2 rounded-full border border-primary/20">Born in the Surf</p>
@@ -910,18 +919,28 @@
 
             // Add hover effect via JS on custom elements
             const hoverTargets = document.querySelectorAll('.hover-target, a, button, .cursor-crosshair, .nitid-glow');
+            const cursorIcon = document.getElementById('cursor-icon');
+            
             hoverTargets.forEach(target => {
                 target.addEventListener('mouseenter', () => {
-                    cursorOutline.style.width = '70px';
-                    cursorOutline.style.height = '70px';
+                    cursorOutline.style.width = '75px';
+                    cursorOutline.style.height = '75px';
                     cursorOutline.style.backgroundColor = 'rgba(255, 181, 156, 0.15)';
-                    cursorDot.style.transform = 'translate(-50%, -50%) scale(0)';
+                    
+                    if(cursorIcon) {
+                        cursorIcon.innerHTML = 'local_cafe';
+                        cursorIcon.style.transform = 'scale(1.2)';
+                    }
                 });
                 target.addEventListener('mouseleave', () => {
-                    cursorOutline.style.width = '40px';
-                    cursorOutline.style.height = '40px';
+                    cursorOutline.style.width = '45px';
+                    cursorOutline.style.height = '45px';
                     cursorOutline.style.backgroundColor = 'transparent';
-                    cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+                    
+                    if(cursorIcon) {
+                        cursorIcon.innerHTML = 'surfing';
+                        cursorIcon.style.transform = 'scale(1)';
+                    }
                 });
             });
         }
